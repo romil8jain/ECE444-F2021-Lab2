@@ -23,8 +23,6 @@ def validEmail(form, email):
 
 @app.route('/', methods = ['GET', 'POST'])
 def index():
-    # session['name'] = None
-    # session['email'] = None
     form = NameForm()
     if form.validate_on_submit():
         if form.email.data is not None and not form.email.data.find('utoronto'):
