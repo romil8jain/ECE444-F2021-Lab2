@@ -10,6 +10,10 @@ app.config['SECRET_KEY'] = 'C2HWGVoMGfNTBsrYQg8EcMrdTimkZfAb'
 bootstrap = Bootstrap(app)
 
 
+def validEmail(form, email):
+        if email.data is not None and email.data.find('@') < 0:
+            raise ValidationError(f'Please include an @ in the email address, {email.data} is missing @')
+
 class NameForm(FlaskForm):
     name = StringField('What is your name?', validators=[DataRequired()])
     email = StringField('What is your UofT Email Address?', validators=[DataRequired(), validEmail])
@@ -17,9 +21,7 @@ class NameForm(FlaskForm):
 
     
 
-def validEmail(form, email):
-        if email is not None and not email.find('@'):
-            raise ValidationError(f'Please include an @ in the email address, {email} is missing @')
+
 
 @app.route('/', methods = ['GET', 'POST'])
 def index():
